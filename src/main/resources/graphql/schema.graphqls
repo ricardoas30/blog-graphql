@@ -1,0 +1,31 @@
+#Schema de dados para o GraphQL.
+# uma espécie de entidade de dados.
+#
+type Post {
+    id: ID! # (!) indica campo obrigatório
+    content: String!
+    comments: [Comment] # array comment, lista de dados
+}
+
+type Comment {
+    id: ID! # (!) indica campo obrigatório
+    content: String!
+    postId: String!
+}
+
+
+# Representado as operações do GraphQL (Query e Mutation)
+# Query - Consulta no GraphQL (leitura)
+# Mutation - Alterações no GraphQL (criar, alterar e deletar)
+#
+type Query {
+    # consulta postById, retorna um post
+    postById(id: ID!) : Post
+}
+
+type Mutation {
+    # cria um post, retorna uma lista de posts
+    createPost(content: String!) : [Post]
+    # cria um comentário, retorna uma lista de comentários
+    createComment(content: String!, postId: String!) : [Comment]
+}
