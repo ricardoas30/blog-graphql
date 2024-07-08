@@ -10,6 +10,61 @@ GraphQL é uma linguagem de consulta criada pelo Facebook em 2012 e lançada pub
 **Dependências** spring-web, spring-graphql
 
 
+## Documentação da API
+
+#### Criando um post
+
+```http
+  mutation CreatePost {
+    createPost(content: "Primeiro post") {
+        id
+        content
+    }
+}
+```
+
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `content` | `string` | **Obrigatório**. Conteúdo do post |
+
+#### Comentando um post
+
+```http
+  mutation CreateComment {
+    createComment(content: "Primeiro comentário", postId: "d29f48bb-192d-4b81-aa68-034747d243a6") {
+        content
+        id
+        postId
+    }
+}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `content`      | `string` | **Obrigatório**. Comentário |
+| `postId`      | `string` | **Obrigatório**. O ID relacionado ao post |
+
+
+#### Consultando um post
+
+```http
+query postById {
+  postById(id: "d29f48bb-192d-4b81-aa68-034747d243a6") {
+    content
+    id
+    comments {
+      content
+      id
+      postId
+    }
+  }
+}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `postId`      | `string` | **Obrigatório**. O ID relacionado ao post |
+
 ## Screenshots
 
 1.Criando um post (mutation)
